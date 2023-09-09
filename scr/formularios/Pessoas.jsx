@@ -131,41 +131,7 @@ function FormPessoa(props) {
             Por favor, informe um endereço!
           </Form.Control.Feedback>
         </Row>
-        <Row>
-          <Col>
-            <Form.Group className="mb-5">
-              <Form.Label>Cidade</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Digite a cidade"
-                required
-                value={pessoa.cidade}
-                id="cidade"
-                onChange={manipularMudanca}
-              />
-            </Form.Group>
-            <Form.Control.Feedback type="invalid">
-              Por favor, informe uma cidade!
-            </Form.Control.Feedback>
-          </Col>
-          <Col>
-            <Form.Group className="mb-5">
-              <Form.Label>Telefone</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="ex:(11)11111-1111"
-                required
-                value={pessoa.telefone}
-                id="telefone"
-                onChange={manipularMudanca}
-              />
-            </Form.Group>
-            <Form.Control.Feedback type="invalid">
-              Por favor, informe um telefone
-            </Form.Control.Feedback>
-          </Col>
-        </Row>
-
+        <br />
         <Row>
           <Col>
             <Form.Group className="mb-5">
@@ -184,6 +150,41 @@ function FormPessoa(props) {
               </Form.Select>
             </Form.Group>
             <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+          </Col>
+
+          <Col>
+            <Form.Group className="mb-5">
+              <Form.Label>Telefone</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="ex:(11)11111-1111"
+                required
+                value={pessoa.telefone}
+                id="telefone"
+                onChange={manipularMudanca}
+              />
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Por favor, informe um telefone
+            </Form.Control.Feedback>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="mb-5">
+              <Form.Label>Cidade</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Digite a cidade"
+                required
+                value={pessoa.cidade}
+                id="cidade"
+                onChange={manipularMudanca}
+              />
+            </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Por favor, informe uma cidade!
+            </Form.Control.Feedback>
           </Col>
         </Row>
 
