@@ -12,6 +12,8 @@ export default function Menu(props) {
               <NavDropdown title="Formulários" id="collapsible-nav-dropdown">
               <LinkContainer to="/cadastroPessoa"><NavDropdown.Item >Pessoas</NavDropdown.Item></LinkContainer>
               <LinkContainer to="/cadastroCidade"><NavDropdown.Item >Cidades</NavDropdown.Item></LinkContainer>
+              <LinkContainer to="/cadastroProduto"><NavDropdown.Item >Produtos</NavDropdown.Item></LinkContainer>
+              <LinkContainer to="/cadastroCategoria"><NavDropdown.Item >Categoria de Produto</NavDropdown.Item></LinkContainer>
               <NavDropdown.Divider />
               <LinkContainer to="/cadastroEvento"><NavDropdown.Item disabled>Eventos</NavDropdown.Item></LinkContainer>
             </NavDropdown>
