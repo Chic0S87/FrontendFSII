@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { urlBackend } from "../assets/funcoes";
+import SearchBar from "../templates/Searchbar/Searchbar";
 
 function FormPessoa(props) {
   const [validated, setValidated] = useState(false);
   const [pessoa, setPessoa] = useState(props.pessoa);
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(props.cidade)
+  const [ listaCidades ,setListaCidades] = useState ([])
+  useEffect(() => {
+    fetch(urlBackend + "/cidades", { method: "GET" })
+      .then((resposta) => {
+        return resposta.json();
+      })
+      .then((dados) => {
+        setListaCidades(dados);
+      });
+  });
 
   function manipularMudanca(e) {
     const elemForm = e.currentTarget;
@@ -171,7 +183,23 @@ function FormPessoa(props) {
         </Row>
         <Row>
           <Col>
-            <Form.Group className="mb-5">
+            <Form.Group>
+              <Form.Label>Selecione uma cidade:</Form.Label>
+              <SearchBar
+                placeHolder={"Busque cidades"}
+                dados={listaCidades}
+                campoChave={"codigo"}
+                campoBusca={"nome"}
+                funcaoSelecao={(cidadeSelecionada) =>{
+                  setCidadeSelecionada(cidadeSelecionada);
+                  setPessoa({...pessoa, cidade:cidadeSelecionada.nome})
+                }}
+                valor={cidadeSelecionada ? cidadeSelecionada.nome : ""}
+                id="cidade"
+                onChange={manipularMudanca}
+              />
+            </Form.Group>
+            {/* <Form.Group className="mb-5">
               <Form.Label>Cidade</Form.Label>
               <Form.Control
                 type="text"
@@ -184,9 +212,10 @@ function FormPessoa(props) {
             </Form.Group>
             <Form.Control.Feedback type="invalid">
               Por favor, informe uma cidade!
-            </Form.Control.Feedback>
+            </Form.Control.Feedback> */}
           </Col>
         </Row>
+        <br/>
 
         <Row>
           <Col>
