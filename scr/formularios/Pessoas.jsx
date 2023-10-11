@@ -4,6 +4,7 @@ import { urlBackend } from "../assets/funcoes";
 import SearchBar from "../templates/Searchbar/Searchbar";
 
 function FormPessoa(props) {
+  const [data, setData] = useState([]);    
   const [validated, setValidated] = useState(false);
   const [pessoa, setPessoa] = useState(props.pessoa);
   const [cidadeSelecionada, setCidadeSelecionada] = useState(props.cidade)
@@ -47,6 +48,7 @@ function FormPessoa(props) {
               novaLista.push(pessoa);
               props.setPessoas(novaLista);
               props.exibirTabela(true);
+              
             }
             window.alert(dados.mensagem);
           })
@@ -61,6 +63,19 @@ function FormPessoa(props) {
         }).then((resposta) => {
           
           return resposta.json();
+        }).then((dados) => {
+          if (dados.status) {
+            props.setModoEdicao(false);
+            let novaLista = props.listaPessoas;
+            novaLista.push(pessoa);
+            props.setPessoas(novaLista);
+            props.exibirTabela(true);
+            setData(novaLista); // Atualize o estado com os dados mais recentes
+          }
+          window.alert(dados.mensagem);
+        })
+        .catch((erro) => {
+          window.alert("Erro ao executar a requisição: " + erro.message);
         });
       }
 
