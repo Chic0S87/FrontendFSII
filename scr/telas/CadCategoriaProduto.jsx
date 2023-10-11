@@ -27,7 +27,7 @@ export default function CadCategoria(props) {
       body: JSON.stringify(categoria),
     }).then((resposta) => {
       window.alert("Categoria excluído com sucesso!!!");
-      window.location.reload();
+      
       return resposta.json();
     });
   }

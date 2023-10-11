@@ -37,8 +37,7 @@ function FormCidade(props) {
               props.exibirTabela(true);
             }
             window.alert(dados.mensagem);
-            window.location.reload();
-          })
+            })
           .catch((erro) => {
             window.alert("Erro ao executar a requisição :" + erro.message);
             

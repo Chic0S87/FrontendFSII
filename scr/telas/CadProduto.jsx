@@ -32,7 +32,7 @@ export default function CadProdutos(props) {
       body: JSON.stringify(produto),
     }).then((resposta) => {
       window.alert("Produto excluído com sucesso!!!");
-      window.location.reload();
+      
       return resposta.json();
     });
   }

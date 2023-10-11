@@ -34,7 +34,7 @@ export default function TelaCadPessoa(props) {
       body: JSON.stringify(pessoa),
     }).then((resposta) => {
       window.alert("Pessoa excluída com sucesso!");
-      window.location.reload();
+      
       return resposta.json();
     });
   }

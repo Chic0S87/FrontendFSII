@@ -54,7 +54,7 @@ export default function ProdutoForm(props) {
         })
           .then((resposta) => {
 
-            window.location.reload();
+            
             return resposta.json()
 
           })

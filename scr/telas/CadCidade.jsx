@@ -27,7 +27,7 @@ export default function TelaCadCidade(props) {
       body: JSON.stringify(cidade),
     }).then((resposta) => {
       window.alert("Cidade excluída com sucesso!");
-      window.location.reload();
+      
       return resposta.json();
     });
   }

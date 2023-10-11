@@ -59,7 +59,7 @@ function FormPessoa(props) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(pessoa),
         }).then((resposta) => {
-          window.location.reload();
+          
           return resposta.json();
         });
       }

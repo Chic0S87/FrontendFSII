@@ -53,7 +53,7 @@ export default function CategoriaForm(props) {
                 })
                     .then((resposta) => {
 
-                        window.location.reload();
+                        
                         return resposta.json()
 
                     })
