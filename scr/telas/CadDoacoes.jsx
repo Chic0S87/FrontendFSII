@@ -7,34 +7,31 @@ import { urlBackend } from "../assets/funcoes";
 
 export default function TelaCadDoacao(props) {
   const [exibirTabela, setExibirTabela] = useState(true);
+  const [produtos, setProdutos] = useState([]);
   const [modoEdicao, setModoEdicao] = useState(false);
-  const [doacao, setDoacao] = useState({
-    codigo: 0,
-    dataDoacao: "",
-    cpfPessoa: "",
-    listaItens: "",
-    quantidade: "",
+  const [produtoEdicao, setProdutoEdicao] = useState({
+    codigo: "",
+    nome: "",
+    metrica: "",
+    descricao: "",
+    codigoCategoria: "",
   });
+  const [categoria, setCategoria] = useState();
 
-  // function preparaTela(doacao) {
-  //   setModoEdicao(true);
-  //   setEditPessoa(pessoa);
-  //   setExibirTabela(false);
-  // }
+  const [doacoes, setDoacoes] = useState([]);
 
-  // function excluirPessoa(pessoa) {
-  //   fetch(urlBackend + "/pessoas", {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(pessoa),
-  //   }).then((resposta) => {
-  //     window.alert("Pessoa excluída com sucesso!");
-  //     window.location.reload();
-  //     return resposta.json();
-  //   });
-  // }
+  function prepararTela(produto) {
+    setModoEdicao(true);
+
+    setProdutoEdicao(produto);
+    setExibirTabela(false);
+  }
 
   useEffect(() => {
+    buscarDoacao();
+  }, []);
+
+  function buscarDoacao() {
     fetch(urlBackend + "/doacao", {
       method: "GET",
     })
@@ -43,11 +40,11 @@ export default function TelaCadDoacao(props) {
       })
       .then((dados) => {
         if (Array.isArray(dados)) {
-          setDoacao(dados);
+          setDoacoes(dados);
         } else {
         }
       });
-  }, []);
+  }
 
   return (
     <Pagina>
@@ -55,19 +52,20 @@ export default function TelaCadDoacao(props) {
         <Alert variant={"secondary"}>Cadastro de Doações</Alert>
         {exibirTabela ? (
           <TabelaDoacoes
-            listaDoacao={doacao}
-            setDoacao={setDoacao}
+            listaProdutos={produtos}
+            listaDoacoes={doacoes}
+            setDoacoes={setDoacoes}
             exibirTabela={setExibirTabela}
-            // editar={preparaTela}
+            editar={prepararTela}
             // excluir={excluirPessoa}
           />
         ) : (
           <FormDoacao
-            listaDoacao={doacao}
-            setDoacao={setDoacao}
+            // listaDoacao={doacao}
+            // setDoacao={setDoacao}
             exibirTabela={setExibirTabela}
-            modoEdicao={modoEdicao}
-            setModoEdicao={setModoEdicao}
+            // modoEdicao={modoEdicao}
+            // setModoEdicao={setModoEdicao}
             // editar={preparaTela}
             // pessoa={editPessoa}
           />
