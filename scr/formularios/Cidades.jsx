@@ -3,6 +3,7 @@ import { Form, Button, Col, Row } from "react-bootstrap";
 import { urlBackend } from "../assets/funcoes";
 
 function FormCidade(props) {
+  const [data, setData] = useState([]);
   const [validated, setValidated] = useState(false);
   const [cidade, setCidade] = useState(props.cidade);
 
@@ -35,22 +36,33 @@ function FormCidade(props) {
               novaLista.push(cidade);
               props.setCidades(novaLista);
               props.exibirTabela(true);
+              setData(novaLista);
             }
             window.alert(dados.mensagem);
-            })
+          })
           .catch((erro) => {
             window.alert("Erro ao executar a requisição :" + erro.message);
-            
           });
       } else {
         fetch(urlBackend + "/cidades", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(cidade),
-        }).then((resposta) => {
-          window.location.reload();
-          return resposta.json();
-        });
+        })
+          .then((resposta) => {
+            return resposta.json();
+          })
+          .then((dados) => {
+            if (dados.status) {
+              props.setModoEdicao(false);
+              let novaLista = props.listaCidades;
+              novaLista.push(cidade);
+              props.setCidades(novaLista);
+              props.exibirTabela(true);
+              setData(novaLista);
+            }
+            window.alert(dados.mensagem);
+          });
       }
 
       setValidated(false);
@@ -64,7 +76,7 @@ function FormCidade(props) {
     <div>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row>
-          <Form.Group >
+          <Form.Group>
             <Form.Label>Nome da Cidade</Form.Label>
             <Form.Control
               type="text"
@@ -100,7 +112,6 @@ function FormCidade(props) {
             </Button>
           </Col>
         </Row>
-            
       </Form>
     </div>
   );

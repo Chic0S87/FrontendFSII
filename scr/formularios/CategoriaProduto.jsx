@@ -3,6 +3,7 @@ import { Form, Button, Col, Row, Stack, } from "react-bootstrap";
 import { urlBackend } from "../assets/funcoes";
 
 export default function CategoriaForm(props) {
+    const [data, setData] = useState([]);
     const [validated, setValidated] = useState(false);
     const [categoria, setCategoria] = useState(props.categoria);
 
@@ -36,6 +37,7 @@ export default function CategoriaForm(props) {
                             props.setCategorias(novaLista)
                             props.buscar()
                             props.exibirTabela(true)
+                            setData(novaLista)
                         }
                         window.alert(dados.mensagem)
                     })
@@ -56,6 +58,17 @@ export default function CategoriaForm(props) {
                         
                         return resposta.json()
 
+                    }).then((dados) => {
+                        if (dados.status) {
+                            props.setModoEdicao(false)
+                            let novaLista = props.listaCategorias;
+                            novaLista.push(categoria)
+                            props.setCategorias(novaLista)
+                            props.buscar()
+                            props.exibirTabela(true)
+                            setData(novaLista)
+                        }
+                        window.alert(dados.mensagem)
                     })
             }
             setValidated(false)

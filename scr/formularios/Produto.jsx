@@ -4,6 +4,7 @@ import { urlBackend } from "../assets/funcoes";
 
 
 export default function ProdutoForm(props) {
+  const [data, setData] = useState([]);
   const [validated, setValidated] = useState(false);
   const [produto, setProduto] = useState(props.produto);
 
@@ -37,6 +38,7 @@ export default function ProdutoForm(props) {
               props.setProdutos(novaLista)
               props.buscarProduto()
               props.exibirTabela(true)
+              setData(novaLista);
             }
             window.alert(dados.mensagem)
           })
@@ -57,6 +59,17 @@ export default function ProdutoForm(props) {
             
             return resposta.json()
 
+          }).then((dados) => {
+            if (dados.status) {
+              props.setModoEdicao(false)
+              let novaLista = props.listaProdutos;
+              novaLista.push(produto)
+              props.setProdutos(novaLista)
+              props.buscarProduto()
+              props.exibirTabela(true)
+              setData(novaLista);
+            }
+            window.alert(dados.mensagem)
           })
       }
       setValidated(false)
